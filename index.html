@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Groceries — Shopping List (Prototype)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="wrapper">
+        <header class="top-bar">
+          <h1 class="title">Make the shopping list</h1>
+          <div class="controls">
+            <button class="btn btn-blue" id="emailBtn">Email list</button>
+            <button class="btn btn-purple" id="exportBtn">Export PDF</button>
+          </div>
+        </header>
+
+        <div class="divider"></div>
+
+        <section class="main">
+          <section class="available">
+            <div class="filter" id="filterWrap">
+              <svg class="icon" viewBox="0 0 24 24" width="18" aria-hidden><path fill="#6b6b6b" d="M3 5h18v2H3zM6 11h12v2H6zM10 17h4v2h-4z"></path></svg>
+              <input id="filterInput" placeholder="type to filter items ..." />
+            </div>
+
+            <div class="items-grid" id="itemsGrid"></div>
+          </section>
+
+          <section class="chosen">
+            <div class="table-header">
+              <div class="col item-col">ITEM</div>
+              <div class="col qty-col">QTY</div>
+              <div class="col unit-col">UNIT</div>
+              <div class="col action-col"></div>
+            </div>
+
+            <div id="chosenList" class="chosen-list"></div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
