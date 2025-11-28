@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   input.addEventListener('input', e=>renderGrid(e.target.value));
   // basic actions
   document.getElementById('emailBtn').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
-  document.getElementById('exportBtn').addEventListener('click', ()=>alert('Export PDF — not implemented in prototype'));
+  document.getElementById('exportBtn').addEventListener('click', exportToPDF);
   
   // dragover & drop handling on chosen list
   const chosenList = document.getElementById('chosenList');
@@ -218,3 +218,76 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
   
 });
+
+function exportToPDF(){
+  if(!state.chosen.length){
+    alert('No items selected to export');
+    return;
+  }
+
+  // Use two columns only for long lists: threshold set to 35 items
+  const TWO_COLUMN_THRESHOLD = 35;
+  const useTwoCols = state.chosen.length > TWO_COLUMN_THRESHOLD;
+
+    const styles = `
+      body{font-family: Arial, Helvetica, sans-serif; padding:28px; color:#111}
+      h1{font-size:20px;margin:0 0 10px}
+      .meta{font-size:12px;color:#666;margin-bottom:18px}
+      .list{display:block}
+      .list.two-col{column-count:2;column-gap:40px}
+      .entry{display:block;margin:6px 0;break-inside:avoid}
+      .entry .text{font-size:14px}
+      .qty{font-weight:700;margin-right:6px}
+      @media print{body{padding:12mm} .no-print{display:none}}
+    `;
+
+  let itemsHtml = '';
+  state.chosen.forEach(id => {
+    const it = ITEMS.find(i=>i.id===id) || {id,name:id,img:IMAGES[id]||''};
+    const qty = state.quantities[id] ?? 1;
+    const unit = state.units[id] ?? 'pcs';
+     // omit images for printable export to produce a compact, print-friendly list
+     itemsHtml += `<div class="entry"><div class="text"><span class="qty">${qty}</span>${unit} — ${it.name}</div></div>`;
+  });
+
+  const docHtml = `
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>Shopping list</title>
+        <style>${styles}</style>
+      </head>
+      <body>
+        <div class="no-print" style="text-align:right;margin-bottom:8px;">
+          <button onclick="window.print()">Print / Save PDF</button>
+        </div>
+        <h1>Shopping list</h1>
+        <div class="meta">Generated: ${new Date().toLocaleString()}</div>
+        <div class="list ${useTwoCols ? 'two-col' : ''}">
+          ${itemsHtml}
+        </div>
+      </body>
+    </html>
+  `;
+
+  const w = window.open('', '_blank');
+  if(!w){
+    alert('Popup blocked. Allow popups for this site to export PDF.');
+    return;
+  }
+  w.document.open();
+  w.document.write(docHtml);
+  w.document.close();
+  // wait a bit for images to load, then call print
+  const tryPrint = () => {
+    try{
+      w.focus();
+      w.print();
+    }catch(e){
+      // ignore
+    }
+  };
+  // give images a moment to load
+  setTimeout(tryPrint, 600);
+}
