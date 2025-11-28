@@ -54,3 +54,74 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 
 /* small responsive */
 @media (max-width:1200px){:root{--page-width:100%}.wrapper{width:100%}}
+
+
+/* mobile responsive */
+@media all and (max-width: 690px) {
+    body {
+        padding: 8px;
+    }
+    .divider {
+        display: none;
+    }
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .title {
+        font-size: 24px;
+    }
+    .controls {
+        display: flex;
+        gap: 12px;
+        margin: 10px;
+        width: 100%;
+    }
+    .btn {
+        font-size: 15px;
+        padding: 16px;
+    }
+    .btn-blue,
+    .btn-purple {
+        flex-grow: 1;
+    }
+
+    .main {
+        display: block;
+        height: 200px;
+    }
+
+    .available {
+        display: block;
+        height: 190px;
+        overflow-x: scroll;
+        margin-bottom: 20px;
+    }
+    .filter {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--stroke);
+        border-radius: 4px;
+        padding: 8px 10px;
+        background: #fff;
+    }
+    .items-grid {
+        margin-top: 12px;
+        border: 1px solid var(--stroke);
+        border-radius: 4px;
+        padding: 16px;
+        background: #fff;
+        height: 140px;
+        overflow: auto;
+        overflow-y: hidden;
+    }   
+    .grid {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 16px;
+        scroll-behavior: smooth;
+    }
+}
