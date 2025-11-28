@@ -37,7 +37,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .qty-col{width:60px}
 .unit-col{width:90px}
 .action-col{width:24px}
-.chosen-list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.chosen-list{margin-top:12px;display:flex;flex-direction:column;gap:8px; overflow-y: scroll; height: 550px;}
 .list-row{display:flex;align-items:center;gap:8px;border:1px solid var(--stroke);padding:8px;border-radius:4px;background:#fff}
 .list-row.dragging{opacity:0.45}
 .handle{width:12px;height:30px;position:relative;cursor:grab}

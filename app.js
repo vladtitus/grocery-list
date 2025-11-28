@@ -67,13 +67,39 @@ function renderGrid(filter=''){
 }
 
 function addItem(id){
+  let added = false;
   if(!state.chosen.includes(id)){
     state.chosen.push(id);
     // default qty and unit
     state.quantities[id] = 1;
     state.units[id] = 'pcs';
+    added = true;
   }
   renderChosen();
+  // if we actually added a new item, ensure it's visible in the scroller
+  if(added) ensureRowVisible(id);
+}
+
+// Ensure a row with given id is visible inside the chosen list container
+function ensureRowVisible(id){
+  const container = document.getElementById('chosenList');
+  if(!container) return;
+  const row = container.querySelector(`[data-id="${id}"]`);
+  if(!row) return;
+  const containerRect = container.getBoundingClientRect();
+  const rowRect = row.getBoundingClientRect();
+  // if bottom of row is below visible bottom, scroll so it's visible at bottom
+  if(rowRect.bottom > containerRect.bottom){
+    // scroll by the difference
+    const diff = rowRect.bottom - containerRect.bottom + 8;
+    container.scrollBy({ top: diff, left: 0, behavior: 'smooth' });
+    return;
+  }
+  // if top of row is above visible top, scroll up
+  if(rowRect.top < containerRect.top){
+    const diff = containerRect.top - rowRect.top + 8;
+    container.scrollBy({ top: -diff, left: 0, behavior: 'smooth' });
+  }
 }
 
 function removeItem(id){
@@ -91,7 +117,7 @@ function renderChosen(){
       const row = document.createElement('div'); row.className='list-row';
       row.setAttribute('data-id', it.id);
       row.innerHTML = `
-        <div class="handle" aria-hidden draggable="true" title="Drag to reorder"></div>
+        
         <div class="name">${it.name}</div>
         <div class="qtyBox"><input type="number" min="1" value="${qtyVal}" /></div>
         <div class="unitBox">
@@ -107,7 +133,7 @@ function renderChosen(){
       `;
 
       // drag start on handle and on the name (both should initiate drag)
-      const handle = row.querySelector('.handle');
+      
       const nameEl = row.querySelector('.name');
       // make name draggable as well
       nameEl.setAttribute('draggable', 'true');
@@ -130,8 +156,7 @@ function renderChosen(){
         if(dragState.placeholder && dragState.placeholder.parentNode) dragState.placeholder.parentNode.removeChild(dragState.placeholder);
       }
 
-      handle.addEventListener('dragstart', onDragStart);
-      handle.addEventListener('dragend', onDragEnd);
+
       nameEl.addEventListener('dragstart', onDragStart);
       nameEl.addEventListener('dragend', onDragEnd);
 
