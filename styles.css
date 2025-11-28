@@ -40,10 +40,6 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .chosen-list{margin-top:12px;display:flex;flex-direction:column;gap:8px; overflow-y: scroll; height: 550px;}
 .list-row{display:flex;align-items:center;gap:8px;border:1px solid var(--stroke);padding:8px;border-radius:4px;background:#fff}
 .list-row.dragging{opacity:0.45}
-.handle{width:12px;height:30px;position:relative;cursor:grab}
-.handle::before,.handle::after{content:'';position:absolute;background:#eee;width:4px;height:4px;border-radius:2px}
-.handle::before{left:1px;top:2px}
-.handle::after{left:7px;top:2px}
 .name{cursor:grab}
 .handle:active,.name:active{cursor:grabbing}
 .name{flex:1;font-weight:600}
