@@ -44,15 +44,6 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .name{cursor:grab}
 .handle:active,.name:active{cursor:grabbing}
 .name{flex:1;font-weight:600}
-.qtyBox{
-    /* width:60px;
-    border:1px solid var(--neutral);
-    border-radius:4px;
-    height:36px;
-    display:flex;
-    align-items:center;
-    justify-content:center; */
-}
 .qtyBox input{
     width: 60px;
     border: 1px solid var(--stroke);
@@ -60,8 +51,6 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     font-weight: 600;
     height: 36px;
     border-radius: 4px;
-    /* padding: 10px; */
-    /* font-size: 24px; */
     line-height: 36px;
 }
 .qtyBox input:hover {
@@ -72,16 +61,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     outline:none;
     border: 1px solid var(--purple);
 }
-.unitBox{
-    /* width:110px;
-    border:1px solid var(--neutral);
-    border-radius:4px;
-    height:36px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:2px 6px */
-}
+
 .unitBox .unitSelect{
     width: 80px;
     border: 1px solid var(--stroke);
@@ -89,8 +69,6 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     font-weight: 600;
     height: 36px;
     border-radius: 4px;
-    /* padding: 10px; */
-    /* font-size: 24px; */
     line-height: 36px;
 }
 .unitBox .unitSelect:hover{
@@ -194,6 +172,10 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         width: 64px;
         height: 64px;
         border-radius: 50%;
+    }
+
+    .chosen {
+        max-width: 690px;
     }
 
     .chosen-list {
