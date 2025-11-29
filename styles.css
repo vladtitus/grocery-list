@@ -15,10 +15,11 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .top-bar{display:flex;align-items:center;justify-content:space-between}
 .title{font-weight:800;font-size:32px;margin:0}
 .controls{display:flex;gap:12px}
+.controls-mobile{display:none}
 .btn{border:0;padding:10px 22px;border-radius:999px;color:#fff;font-weight:600;cursor:pointer}
 .btn-blue{background:var(--blue)}
 .btn-purple{background:var(--purple)}
-.divider{height:2px;background:var(--stroke);margin:18px 0}
+.divider{height:1px;background:var(--stroke);margin:18px 0}
 .main{display:flex;gap:24px}
 .available{flex:1}
 .chosen{flex:1;max-width:560px}
@@ -111,7 +112,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 }
 .removeBtn:hover{
     color:var(--purple);
-}}
+}
 
 
 .placeholder{border:2px dashed #d8d8d8;border-radius:4px;margin:0}
@@ -128,20 +129,22 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     .divider {
         display: none;
     }
+    .desktop-only {
+        display: none;
+    }
+    .mobile-only {
+        display: flex;
+        gap: 8px;
+    }
     .top-bar {
         display: flex;
         align-items: center;
         justify-content: space-around;
         flex-direction: column;
+        margin-bottom: 14px;
     }
     .title {
         font-size: 24px;
-    }
-    .controls {
-        display: flex;
-        gap: 12px;
-        margin: 10px;
-        width: 100%;
     }
     .btn {
         font-size: 15px;
@@ -159,9 +162,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 
     .available {
         display: block;
-        height: 210px;
-        /* overflow-x: scroll; */
-        margin-bottom: 8px;
+        height: 182px;
     }
     .filter {
         display: flex;
@@ -178,7 +179,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         border-radius: 4px;
         padding: 16px;
         background: #fff;
-        height: 140px;
+        height: 120px;
         overflow: auto;
         overflow-y: hidden;
     }   
@@ -187,5 +188,15 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         flex-wrap: nowrap;
         gap: 16px;
         scroll-behavior: smooth;
+    }
+
+    .item .imgWrap {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+    }
+
+    .chosen-list {
+        height: 400px;
     }
 }
