@@ -97,7 +97,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         display: block;
         height: 210px;
         /* overflow-x: scroll; */
-        margin-bottom: 20px;
+        margin-bottom: 8px;
     }
     .filter {
         display: flex;
