@@ -1,37 +1,37 @@
 // Lightweight static implementation wiring images from Figma export
 const IMAGES = {
-  banana: 'http://localhost:3845/assets/83764906c5d584c1e3e9e8ff7ae4ddbc7cf06c3c.png',
-  apple: 'http://localhost:3845/assets/2efe6320bcf37b2c5313b9a5a7a6021d4a50ad64.png',
-  tomato: 'http://localhost:3845/assets/12c5b97ea61feebaf3ecb4725b08557885df8313.png',
-  cucumber: 'http://localhost:3845/assets/32b950bec53e0e9bdc958739bd80399a82d8075a.png',
-  onion: 'http://localhost:3845/assets/3a85a1547ff6fd96697629188a0d3dbb9a45936a.png',
-  potatoes: 'http://localhost:3845/assets/ee0283d764bd1b2e22c03fd308d38a124234d467.png',
-  garlic: 'http://localhost:3845/assets/b106799431c5b65b77dd02466bb68d972db0688a.png',
-  carrots: 'http://localhost:3845/assets/5dd711851c7f57749768226aa9698e65a13c59a4.png',
-  chicken: 'http://localhost:3845/assets/281cb0f68ffdd33beb63076c5ce28029ad62a5c1.png',
-  salami: 'http://localhost:3845/assets/5795a45413c4a13a06506d91ff80cba594c5abd7.png',
-  ham: 'http://localhost:3845/assets/1468566417eba6f9cfb3ac1373fd7ed2b60d786d.png',
-  milk: 'http://localhost:3845/assets/d4e90115ae6e82e9995efbad524ca6cec166e7a9.png',
-  yoghurt: 'http://localhost:3845/assets/2ddb2986b57800ecb2b7600da1a4d10e957b8343.png',
-  coffee: 'http://localhost:3845/assets/6b37cc86044e2e180d4bcbc9c6d01e6d0dea0231.png',
-  orange: 'http://localhost:3845/assets/27fca1e47a01ce1311017b258e792b7a6e6e3d28.png',
-  kiwi: 'http://localhost:3845/assets/e46d6157c6b0492b350d99c0ef92ce80e74b35ef.png',
-  nuts: 'http://localhost:3845/assets/389a98b88fc17c11e63b64d4ae21cd87c7cfa37c.png',
-  salmon: 'http://localhost:3845/assets/3685ddf91f36e4eaa012a9f689c99f2bcda91416.png',
-  chocolate: 'http://localhost:3845/assets/813b97a8c804ca36a84a3da749d832c8989ad131.png',
-  beer: 'http://localhost:3845/assets/c9686e7f00866ef5c02ef995b1fea05e1c479cb1.png',
-  cheese: 'http://localhost:3845/assets/ab9fc965af41495675634a877252ee02c6c285db.png',
-  toothpaste: 'http://localhost:3845/assets/2141553bfd04ca844489730346f2d6235d28a04f.png',
-  shampoo: 'http://localhost:3845/assets/ec1cdd679ae0658d42ac0e399c718a79fab5a544.png',
-  soap: 'http://localhost:3845/assets/198c190981e3aff12428da3314d6003c2431da9d.png',
-  candle: 'http://localhost:3845/assets/f991774cc37f57c985f86d1bce5dc3f5bc7599bb.png',
-  butter: 'http://localhost:3845/assets/58ca32f0044bc3f890ced3eb253cc44f80ef32e6.png',
-  fishcans: 'http://localhost:3845/assets/3f68ed037cf0d2337ad95dca30ca081ed2c07b35.png',
-  spaghetti: 'http://localhost:3845/assets/2477e8f2f70030d55b7bba0c1eb9607c13058b68.png',
-  rice: 'http://localhost:3845/assets/b09faecf05677ae1fe269040316c24277c8ff2c2.png',
-  bread: 'http://localhost:3845/assets/b8c746876049d628fa673ea0a68cd32280a15a1a.png',
-  paprika: 'http://localhost:3845/assets/d1042af05b6bef045f3e95af2b2c69dae00d85fc.png',
-  pear: 'http://localhost:3845/assets/c8cbc933fbc64e512f1511b56d2ad542a8d89e0a.png'
+  banana: './images/banana.png',
+  apple: './images/apple.png',
+  tomato: './images/tomato.png',
+  cucumber: './images/cucumber.png',
+  onion: './images/onion.png',
+  potatoes: './images/potato.png',
+  garlic: './images/garlic.png',
+  carrots: './images/carrots.png',
+  chicken: './images/chicken.png',
+  salami: './images/salami.png',
+  ham: './images/ham.png',
+  milk: './images/milk.png',
+  yoghurt: './images/yoghurt.png',
+  coffee: './images/coffee.png',
+  orange: './images/orange.png',
+  kiwi: './images/kiwi.png',
+  nuts: './images/nuts.png',
+  salmon: './images/salmon.png',
+  chocolate: './images/chocolate.png',
+  beer: './images/beer.png',
+  cheese: './images/cheese.png',
+  toothpaste: './images/toothpaste.png',
+  shampoo: './images/shampoo.png',
+  soap: './images/soap.png',
+  candle: './images/candle.png',
+  butter: './images/butter.png',
+  fishcans: './images/fish-can.png',
+  spaghetti: './images/spaghetti.png',
+  rice: './images/rice.png',
+  bread: './images/bread.png',
+  paprika: './images/paprika.png',
+  pear: './images/pear.png'
 };
 
 const ITEMS = Object.keys(IMAGES).map(k => ({id:k, name:k.replace(/(^.|[A-Z])/g, s=>s===s.toUpperCase()?s:' '+s).trim(), img: IMAGES[k]}));
@@ -193,6 +193,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   // basic actions
   document.getElementById('emailBtn').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
   document.getElementById('exportBtn').addEventListener('click', exportToPDF);
+
+  document.getElementById('emailBtn-2').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
+  document.getElementById('exportBtn-2').addEventListener('click', exportToPDF);
   
   // dragover & drop handling on chosen list
   const chosenList = document.getElementById('chosenList');
