@@ -191,10 +191,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const input = document.getElementById('filterInput');
   input.addEventListener('input', e=>renderGrid(e.target.value));
   // basic actions
-  document.getElementById('emailBtn').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
+  // document.getElementById('emailBtn').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
   document.getElementById('exportBtn').addEventListener('click', exportToPDF);
 
-  document.getElementById('emailBtn-2').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
+  // document.getElementById('emailBtn-2').addEventListener('click', ()=>alert('Email action — not implemented in prototype'));
   document.getElementById('exportBtn-2').addEventListener('click', exportToPDF);
   
   // dragover & drop handling on chosen list
