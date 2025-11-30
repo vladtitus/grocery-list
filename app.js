@@ -7,7 +7,7 @@ const IMAGES = {
   onion: './images/onion.png',
   potatoes: './images/potato.png',
   garlic: './images/garlic.png',
-  carrots: './images/carrots.png',
+  carrots: './images/carrot.png',
   chicken: './images/chicken.png',
   salami: './images/salami.png',
   ham: './images/ham.png',
