@@ -249,70 +249,97 @@ function exportToPDF(){
     alert('No items selected to export');
     return;
   }
-
   // Use two columns only for long lists: threshold set to 35 items
   const TWO_COLUMN_THRESHOLD = 35;
   const useTwoCols = state.chosen.length > TWO_COLUMN_THRESHOLD;
 
-    const styles = `
-      body{font-family: Arial, Helvetica, sans-serif; padding:28px; color:#111}
-      h1{font-size:20px;margin:0 0 10px}
-      .meta{font-size:12px;color:#666;margin-bottom:18px}
-      .list{display:block}
-      .list.two-col{column-count:2;column-gap:40px}
-      .entry{display:block;margin:6px 0;break-inside:avoid}
-      .entry .text{font-size:14px}
-      .qty{font-weight:700;margin-right:6px}
-      @media print{body{padding:12mm} .no-print{display:none}}
-    `;
-
-  let itemsHtml = '';
-  state.chosen.forEach(id => {
-    const it = ITEMS.find(i=>i.id===id) || {id,name:id,img:IMAGES[id]||''};
-    const qty = state.quantities[id] ?? 1;
-    const unit = state.units[id] ?? 'pcs';
-     // omit images for printable export to produce a compact, print-friendly list
-     itemsHtml += `<div class="entry"><div class="text"><span class="qty">${qty}</span>${unit} — ${it.name}</div></div>`;
-  });
-
-  const docHtml = `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <title>Shopping list</title>
-        <style>${styles}</style>
-      </head>
-      <body>
-        <div class="no-print" style="text-align:right;margin-bottom:8px;">
-          <button onclick="window.print()">Print / Save PDF</button>
-        </div>
-        <h1>Shopping list</h1>
-        <div class="meta">Generated: ${new Date().toLocaleString()}</div>
-        <div class="list ${useTwoCols ? 'two-col' : ''}">
-          ${itemsHtml}
-        </div>
-      </body>
-    </html>
-  `;
-
-  const w = window.open('', '_blank');
-  if(!w){
-    alert('Popup blocked. Allow popups for this site to export PDF.');
-    return;
-  }
-  w.document.open();
-  w.document.write(docHtml);
-  w.document.close();
-  // wait a bit for images to load, then call print
-  const tryPrint = () => {
-    try{
-      w.focus();
-      w.print();
-    }catch(e){
-      // ignore
+  // Generate PDF using jsPDF (client-side)
+  try{
+    const { jsPDF } = window.jspdf || window.jspdf || {};
+    if(!jsPDF){
+      alert('jsPDF is not loaded. Export unavailable.');
+      return;
     }
-  };
-  // give images a moment to load
-  setTimeout(tryPrint, 600);
+
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 18; // mm
+    const gutter = 10; // between columns
+    const fontSize = 12;
+    doc.setFontSize(fontSize);
+    const lineHeight = fontSize * 0.7; // approx mm
+
+    const items = state.chosen.map(id => {
+      const it = ITEMS.find(i=>i.id===id) || {id,name:id,img:IMAGES[id]||''};
+      return { name: it.name, qty: state.quantities[id] ?? 1, unit: state.units[id] ?? 'pcs' };
+    });
+
+    // single column layout
+    if(!useTwoCols){
+      let x = margin;
+      let y = margin;
+      doc.text('Shopping list', x, y);
+      y += lineHeight * 1.8;
+      doc.setFontSize(10); doc.setTextColor(100);
+      doc.text('Generated: ' + new Date().toLocaleString(), x, y);
+      doc.setFontSize(fontSize);
+      y += lineHeight * 1.6;
+
+      for(const it of items){
+        const line = `${it.name} — ${it.qty} ${it.unit}`;
+        if(y + lineHeight > pageHeight - margin){
+          doc.addPage();
+          y = margin;
+        }
+        doc.setTextColor(0);
+        doc.text(line, x, y);
+        y += lineHeight;
+      }
+    } else {
+      // two-column per page layout: split per page
+      const colWidth = (pageWidth - margin*2 - gutter) / 2;
+      const linesPerColumn = Math.floor((pageHeight - margin*2 - 20) / lineHeight);
+      const itemsPerPage = linesPerColumn * 2;
+      let pageIndex = 0;
+      while(pageIndex * itemsPerPage < items.length){
+        if(pageIndex > 0) doc.addPage();
+        const start = pageIndex * itemsPerPage;
+        const pageItems = items.slice(start, start + itemsPerPage);
+        // header
+        let xLeft = margin;
+        let xRight = margin + colWidth + gutter;
+        let yTop = margin;
+        doc.setFontSize(14); doc.text('Shopping list', xLeft, yTop);
+        doc.setFontSize(10); doc.setTextColor(100);
+        doc.text('Generated: ' + new Date().toLocaleString(), xLeft, yTop + lineHeight * 1.2);
+        doc.setFontSize(fontSize); doc.setTextColor(0);
+        yTop += lineHeight * 2.4;
+
+        const leftItems = pageItems.slice(0, linesPerColumn);
+        const rightItems = pageItems.slice(linesPerColumn);
+
+        let y = yTop;
+        for(const it of leftItems){
+          doc.text(`${it.name} — ${it.qty} ${it.unit}`, xLeft, y);
+          y += lineHeight;
+        }
+
+        y = yTop;
+        for(const it of rightItems){
+          doc.text(`${it.name} — ${it.qty} ${it.unit}`, xRight, y);
+          y += lineHeight;
+        }
+
+        pageIndex++;
+      }
+    }
+
+    const now = new Date();
+    const filename = `shopping-list-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}.pdf`;
+    doc.save(filename);
+  }catch(err){
+    console.error('PDF export failed', err);
+    alert('Failed to create PDF: ' + (err && err.message));
+  }
 }
