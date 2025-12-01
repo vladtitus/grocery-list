@@ -5,7 +5,11 @@
   --stroke: #e3e3e3;
   --neutral: #606060;
   --blue: #2ba1dc;
+  --blue-interactive:#1fa0e0;
   --purple: #b82bdc;
+  --purple-interactive:#be25e4;
+  --green: #22cb22;
+  --green-interactive:#19e019;
   --black: #111;
 }
 *{box-sizing:border-box}
@@ -16,9 +20,13 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .title{font-weight:800;font-size:32px;margin:0}
 .controls{display:flex;gap:12px}
 .mobile-only{display:none}
-.btn{border:0;padding:10px 22px;border-radius:999px;color:#fff;font-weight:600;cursor:pointer}
+.btn{border:0;padding:12px 24px;border-radius:999px;color:#fff;font-weight:600;cursor:pointer; box-shadow: 0 0px 0px 5px rgba(0, 0, 0, 0.12); border: 2px solid var(--bg)}
 .btn-blue{background:var(--blue)}
 .btn-purple{background:var(--purple)}
+.btn-green{background:var(--green)}
+.btn-blue:hover{background:var(--blue-interactive)}
+.btn-purple:hover{background:var(--purple-interactive)}
+.btn-green:hover{background:var(--green-interactive)}
 .divider{height:1px;background:var(--stroke);margin:18px 0}
 .main{display:flex;gap:24px}
 .available{flex:1}
@@ -55,11 +63,11 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 }
 .qtyBox input:hover {
     outline:none;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--green);
 }
 .qtyBox input:focus{
     outline:none;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--green);
 }
 
 .unitBox .unitSelect{
@@ -73,11 +81,11 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 }
 .unitBox .unitSelect:hover{
     outline:none;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--green);
 }
 .unitBox .unitSelect:focus{
     outline:none;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--green);
 }
 .removeBtn{
     width:24px;
@@ -89,7 +97,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     font-weight: 600;
 }
 .removeBtn:hover{
-    color:var(--purple);
+    color:var(--green);
 }
 
 
@@ -119,7 +127,8 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         align-items: center;
         justify-content: space-around;
         flex-direction: column;
-        margin-bottom: 14px;
+        margin-top: 12px;
+        margin-bottom: 24px;
     }
     .title {
         font-size: 24px;
@@ -129,7 +138,8 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         padding: 16px;
     }
     .btn-blue,
-    .btn-purple {
+    .btn-purple ,
+    .btn-green {
         flex-grow: 1;
     }
 
@@ -155,11 +165,14 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
         margin-top: 12px;
         border: 1px solid var(--stroke);
         border-radius: 4px;
-        padding: 16px;
+        padding: 12px;
         background: #fff;
         height: 120px;
         overflow: auto;
         overflow-y: hidden;
+        border-radius: 4px;
+        background: #f3f3f3;
+        box-shadow: 0px 3px 2px rgb(255 255 255 / 40%) inset;
     }   
     .grid {
         display: flex;
@@ -175,12 +188,12 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     }
 
     .table-header {
-        box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
         position: relative;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        padding: 8px 16px;
-        gap: 16px;
+        padding: 12px 16px;
+        gap: 6px;
     }
 
     .chosen {
@@ -190,7 +203,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
     .chosen-list {
         margin-top: 0;
         margin-bottom: 20px;
-        height: 400px;
+        height: 362px;
         box-shadow: 0 3px 0px rgba(0, 0, 0, 0.2);
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
