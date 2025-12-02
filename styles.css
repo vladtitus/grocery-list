@@ -12,7 +12,10 @@
   --green-interactive:#19e019;
   --black: #111;
 }
-*{box-sizing:border-box}
+*,
+html{
+    box-sizing:border-box
+}
 body{
     font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
     line-height:1;
