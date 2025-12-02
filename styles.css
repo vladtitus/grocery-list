@@ -216,7 +216,7 @@ body{
     align-items: center;
     gap: 8px;
     border: 1px solid var(--stroke);
-    padding: 8px;
+    padding: 4px 8px;
     border-radius: 4px;
     background: #fff;
     transition: all 0.25s;
@@ -242,15 +242,16 @@ body{
 .name {
     flex: 1;
     font-weight: 600;
+    line-height: 40px;
 }
 .qtyBox input{
     width: 60px;
     border: 1px solid var(--stroke);
     text-align: center;
     font-weight: 600;
-    height: 36px;
+    height: 40px;
     border-radius: 4px;
-    line-height: 36px;
+    line-height: 40px;
 }
 .qtyBox input:hover {
     outline:none;
@@ -266,9 +267,9 @@ body{
     border: 1px solid var(--stroke);
     text-align: left;
     font-weight: 600;
-    height: 36px;
+    height: 40px;
     border-radius: 4px;
-    line-height: 36px;
+    line-height: 40px;
 }
 .unitBox .unitSelect:hover{
     outline:none;
