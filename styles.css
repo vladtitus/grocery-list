@@ -21,7 +21,8 @@ body{
     line-height:1;
     color:var(--black);
     background:var(--bg);
-    padding:36px}
+    padding:20px
+}
 .page{
     display:flex;
     justify-content:center
@@ -326,6 +327,7 @@ body{
     .btn {
         font-size: 15px;
         padding: 16px;
+        flex: 1;
     }
     .btn-blue,
     .btn-purple ,
